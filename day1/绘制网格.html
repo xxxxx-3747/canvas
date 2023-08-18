@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600" height="400"></canvas>
+
+<script>
+    var canvasObj = document.querySelector('canvas');
+    var ctx = canvasObj.getContext('2d');
+
+    //网格的大小
+    var gridSize = 10;
+    //获取画布的大小
+    var canvasWidth = ctx.canvas.width;
+    var canvasHeight = ctx.canvas.height;
+
+    var x=Math.floor(canvasWidth/gridSize);
+    var y=Math.floor(canvasHeight/gridSize);
+    console.log(x);
+    console.log(y);
+
+    // ctx.beginPath();
+    // ctx.moveTo(0,0);
+    // ctx.lineTo(canvasWidth,0);
+    // ctx.strokeStyle='#ddd';
+    // ctx.stroke();
+    //
+    // ctx.beginPath();
+    // ctx.moveTo(0,0+x);
+    // ctx.lineTo(canvasWidth,0+x);
+    // ctx.strokeStyle='#ddd';
+    // ctx.stroke();
+
+    // 横线
+    for(var i=0;i<y;i++){
+        ctx.beginPath();
+        ctx.moveTo(0,i*gridSize);
+        ctx.lineTo(canvasWidth,i*gridSize);
+        ctx.strokeStyle='#ddd';
+        ctx.stroke();
+    }
+
+    // 竖线
+    for(var i=0;i<x;i++){
+        ctx.beginPath();
+        ctx.moveTo(i*gridSize,0);
+        ctx.lineTo(i*gridSize,canvasHeight);
+        ctx.strokeStyle='#ddd';
+        ctx.stroke();
+    }
+
+
+</script>
+
+</body>
+</html>
