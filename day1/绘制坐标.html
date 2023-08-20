@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px #000 solid;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600" height="400"></canvas>
+<script>
+    var canvasObj = document.querySelector('canvas');
+    var ctx = canvasObj.getContext('2d');
+
+    //确定原点的位置
+    var space = 20;
+
+    //确定箭头的尺寸
+    var arrowSize = 10;
+
+    //获取canvas的宽度
+    var canvasWidth = ctx.canvas.width;
+    //获取canvas的高度
+    var canvasHeight = ctx.canvas.height;
+
+    //原点的位置
+    var x0 = space;
+    var y0 = canvasHeight - space;
+
+    //绘制横坐标
+    ctx.beginPath();
+    ctx.moveTo(x0, y0);
+    ctx.lineTo(canvasWidth - space, y0);
+    //绘制箭头
+    ctx.lineTo(canvasWidth - space - arrowSize, y0 + arrowSize / 2);
+    ctx.lineTo(canvasWidth - space - arrowSize, y0 - arrowSize / 2);
+    ctx.lineTo(canvasWidth - space, y0);
+    ctx.fill();
+    ctx.stroke();
+
+    //绘制纵坐标
+    ctx.beginPath();
+    ctx.moveTo(x0, y0);
+    ctx.lineTo(x0, space);
+    //绘制箭头
+    ctx.lineTo(x0 + arrowSize / 2, space + arrowSize);
+    ctx.lineTo(x0 - arrowSize / 2, space + arrowSize);
+    ctx.lineTo(x0, space);
+
+    ctx.fill();
+    ctx.stroke();
+
+
+</script>
+
+</body>
+</html>

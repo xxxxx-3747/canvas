@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600" height="400"></canvas>
+<script>
+    var canvasObj=document.querySelector('canvas');
+    var ctx=canvasObj.getContext('2d');
+
+    //确定点的大小
+    var dottedSize=10;
+
+    //确定点的坐标
+    var coordinate={
+        x:100,
+        y:100
+    }
+
+    ctx.moveTo(coordinate.x-dottedSize/2,coordinate.y-dottedSize/2);
+    ctx.lineTo(coordinate.x+dottedSize/2,coordinate.y-dottedSize/2);
+    ctx.lineTo(coordinate.x+dottedSize/2,coordinate.y+dottedSize/2);
+    ctx.lineTo(coordinate.x-dottedSize/2,coordinate.y+dottedSize/2);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+</script>
+
+</body>
+</html>
