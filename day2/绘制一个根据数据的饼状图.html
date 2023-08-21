@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600" height="400"></canvas>
+<script>
+    var canvasObj = document.querySelector('canvas');
+    var ctx = canvasObj.getContext('2d');
+
+    //获取canvas的宽高
+    var canvasWidth = ctx.canvas.width;
+    var canvasHeight = ctx.canvas.height;
+
+    //获取一个随机颜色
+    var getRandomColor = function () {
+        var r = Math.random() * 255;
+        var g = Math.random() * 255;
+        var b = Math.random() * 255;
+        return 'rgb(' + r + ',' + g + ',' + b + ')';
+    }
+    /*1.根据37期的年龄分布绘制饼图*/
+    /*2.准备统计的数据*/
+    /*15-20岁 6个*/
+    /*20-25岁 30个*/
+    /*25-30岁 10个*/
+    /*30-35岁 8个*/
+    var data = [6, 30, 10, 8];
+    /*3.在饼图表示出来*/
+    /*4.需要把数据转出弧度*/
+
+    var sum = 0;
+    var angle = [];
+    //获取data的总量
+    data.forEach(function (item, i) {
+        sum += item;
+    });
+    //获取每一段的弧度
+    data.forEach(function (item, i) {
+        var anglex0 = (item / sum) * Math.PI * 2;
+        angle.push(anglex0);
+    });
+    //记录开始的位置
+    var startLocation=0;
+    //根据数据绘制扇形
+    angle.forEach(function (item,i) {
+
+        //记录结束的位置
+        var endLocation=startLocation + item;
+        // console.log(endLocation);
+        ctx.beginPath();
+        ctx.moveTo(canvasWidth/2,canvasHeight/2);
+        ctx.arc(canvasWidth/2,canvasHeight/2,150,startLocation,endLocation);
+        ctx.closePath();
+        ctx.fillStyle=getRandomColor();
+        ctx.fill();
+        startLocation=endLocation;
+    })
+
+
+</script>
+
+</body>
+</html>
