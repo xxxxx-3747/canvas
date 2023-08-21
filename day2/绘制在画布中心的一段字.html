@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600" height="400"></canvas>
+<script>
+    var canvasObj=document.querySelector('canvas');
+    var ctx=canvasObj.getContext('2d');
+
+    //获取canvas的宽高
+    var canvasWidth=ctx.canvas.width;
+    var canvasHeight=ctx.canvas.height;
+    var x0=canvasWidth/2;
+    var y0=canvasHeight/2;
+    //绘制两条中心线
+    ctx.beginPath();
+    ctx.moveTo(0,canvasHeight/2);
+    ctx.lineTo(canvasWidth,canvasHeight/2);
+    ctx.strokeStyle='#ccc';
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(canvasWidth/2,0);
+    ctx.lineTo(canvasWidth/2,canvasHeight);
+    ctx.strokeStyle='#ccc';
+    ctx.stroke();
+
+    //一段文字
+    var txt='你好，陈鑫';
+
+    ctx.beginPath();
+
+    //设置文字的颜色
+    ctx.strokeStyle='blue';
+
+    //设置文字的大小
+    ctx.font= '20px 黑体';
+    // ctx.font = '40px Microsoft YaHei';
+
+    //文字居中
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    //绘制一段文字
+    // ctx.beginPath();
+    // ctx.strokeStyle='blue';
+    ctx.strokeText(txt,x0,y0);
+    // ctx.fillStyle='blue';
+    // ctx.fillText(txt,x0,y0);
+
+
+    //获取文字的长度
+    var length=ctx.measureText(txt).width;
+
+    //在文字下面添加一条横线
+    ctx.beginPath();
+
+    ctx.moveTo(x0-length/2,y0+10);
+    ctx.lineTo(x0+length/2,y0+10);
+    ctx.strokeStyle='#000';
+    ctx.stroke();
+
+
+
+
+</script>
+
+</body>
+</html>
