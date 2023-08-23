@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600" height="400"></canvas>
+<script>
+    var canvasObj = document.querySelector('canvas');
+    var ctx = canvasObj.getContext('2d');
+
+    //获取canvas的宽高
+    var canvasWidth = ctx.canvas.width;
+    var canvasHeight = ctx.canvas.height;
+
+    var img = new Image();
+    img.onload = function () {
+        //获取图片的宽高
+        var imgWidth = img.width;
+        var imgHeight = img.height;
+
+        //获取小人的宽高
+        var personWidth = imgWidth / 4;
+        var personHeight = imgHeight / 4;
+
+        //绘制的原点的坐标
+        var x0 = canvasWidth / 2 - personWidth / 2;
+        var y0 = canvasHeight / 2 - personHeight / 2;
+
+        //展示小人
+        ctx.drawImage(img,
+            0, 0,
+            personWidth, personHeight,
+            x0, y0,
+            personWidth, personHeight);
+
+        var index = 0;
+        //运动的小人
+        setInterval(function () {
+            //先清除画布
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            index++;
+            ctx.drawImage(img,
+                index * personWidth, 0,
+                personWidth, personHeight,
+                x0, y0,
+                personWidth, personHeight);
+            if (index >= 3) {
+                index = 0;
+            }
+        }, 500);
+
+    };
+    img.src = 'image/03.png';
+</script>
+
+</body>
+</html>

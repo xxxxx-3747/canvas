@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600" height="400"></canvas>
+<script>
+    // var canvasObj=document.querySelector('canvas');
+    // var ctx=canvasObj.getContext('2d');
+
+    var Person = function (ctx) {
+        //绘制工具
+        this.ctx = ctx || document.querySelector('canvas').getContext('2d');
+        //图片的路径
+        this.src = 'image/04.png';
+        //画笔的大小
+        this.canvasWidth = this.ctx.canvas.width;
+        this.canvasHeight = this.ctx.canvas.height;
+        //图片的大小
+        // this.imgWidth=this.width;
+        // this.init();
+        //每一步的大小
+        this.stepSize = 10;
+        //移动的方向
+        this.direction = 0;
+        //x轴的偏移距离
+        this.stepX = 0;
+        //y轴的偏移距离
+        this.stepY = 0;
+    }
+    Person.prototype.init = function () {
+        var that = this;
+        //加载图片
+        this.loadImage(function (img) {
+            //图片的大小
+            that.imgWidth = img.width;
+            that.imgHeight = img.height;
+
+            //小人的大小
+            that.personWidth = that.imgWidth / 4;
+            that.personHeight = that.imgHeight / 4;
+
+            //绘制图片的起始位置
+            that.x0 = that.canvasWidth / 2 - that.personWidth / 2;
+            that.y0 = that.canvasHeight / 2 - that.personHeight / 2;
+
+            //绘制小人
+            that.ctx.drawImage(img,
+                0, 0,
+                that.personWidth, that.personHeight,
+                that.x0, that.y0,
+                that.personWidth, that.personHeight);
+
+            //通过方向键控制小人
+            // document.addEventListener('keydown',function (e) {
+            // });
+            //记录获取第几个小人
+            that.index = 0;
+            document.onkeydown = function (e) {
+                // alert(e.keyCode);
+                if (e.keyCode == 40) {
+                    //下键
+                    // that.index++;
+                    that.direction = 0;
+                    that.stepY ++;
+                    that.drawImage(img);
+
+                } else if (e.keyCode == 37) {
+                    //左键
+                    that.direction = 1;
+                    that.stepX --;
+                    that.drawImage(img);
+
+                } else if (e.keyCode == 38) {
+                    //上键
+                    that.direction =3;
+                    that.stepY --;
+                    that.drawImage(img);
+
+                } else if (e.keyCode == 39) {
+                    //右键
+                    that.direction = 2;
+                    that.stepX ++;
+                    that.drawImage(img);
+
+                }
+            }
+        })
+
+    }
+    //加载图片
+    Person.prototype.loadImage = function (callback) {
+        var img = new Image();
+        img.onload = function () {
+            callback && callback(img);
+        }
+        img.src = this.src;
+    }
+    //绘制图片
+    Person.prototype.drawImage = function (img) {
+        this.index++;
+        //清空画布
+        this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+        //绘制小人
+        this.ctx.drawImage(img,
+            this.index * this.personWidth, this.direction * this.personHeight,
+            this.personWidth, this.personHeight,
+            this.x0 + this.stepX * this.stepSize, this.y0 + this.stepY * this.stepSize,
+            this.personWidth, this.personHeight);
+        if (this.index >= 3) {
+            this.index = 0;
+        }
+
+    }
+    var person = new Person();
+    person.init();
+    // new Person();
+</script>
+
+</body>
+</html>
